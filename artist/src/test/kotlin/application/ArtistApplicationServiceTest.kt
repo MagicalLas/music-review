@@ -1,6 +1,7 @@
 package application
 
 import ArtistApplicationService
+import adapter.InMemoryArtistRepository
 import domain.Artist
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -10,7 +11,9 @@ import strikt.assertions.isTrue
 
 class ArtistApplicationServiceTest : Spek({
     Feature("Artist 등록하기") {
-        val artistApplicationService = ArtistApplicationService()
+        val artistApplicationService = ArtistApplicationService(
+            InMemoryArtistRepository(),
+        )
         Scenario("새로운 아티스트 등록하기") {
             lateinit var name: String
             lateinit var description: String
