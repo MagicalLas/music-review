@@ -2,14 +2,17 @@ package application
 
 import adapter.InMemoryArtistRepository
 import adapter.InMemoryMusicRepository
+import arrow.core.Either
 import domain.Artist
+import domain.ArtistNotFoundError
 import domain.Music
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import strikt.api.expectThat
+import strikt.assertions.isEqualTo
 import strikt.assertions.isTrue
 
-class MusicApplicationServiceTest: Spek({
+class MusicApplicationServiceTest : Spek({
     Feature("Release New Music") {
         val artistRepository = InMemoryArtistRepository()
         val musicRepository = InMemoryMusicRepository()
@@ -20,7 +23,7 @@ class MusicApplicationServiceTest: Spek({
 
         Scenario("한 아티스트가 자신이 만든 곡을 공개한다.") {
             lateinit var artist: Artist
-            lateinit var releasedMusic: Music
+            lateinit var releasedMusic: Either<ArtistNotFoundError, Music>
 
             Given("아티스트가 이미 등록이 되어있으면") {
                 artist = Artist(artistRepository.nextId(), "Wafia", "Wafia is artist")
@@ -38,7 +41,13 @@ class MusicApplicationServiceTest: Spek({
                 )
             }
             Then("공개한 곡을 찾을 수 있다.") {
-                expectThat(musicApplicationService.findSpecificMusic(releasedMusic.id).isRight()).isTrue()
+                expectThat(
+                    releasedMusic.map {
+                        musicApplicationService.findSpecificMusic(it.id).map { foundMusic ->
+                            expectThat(foundMusic).isEqualTo(it)
+                        }
+                    }.isRight()
+                ).isTrue()
             }
         }
     }

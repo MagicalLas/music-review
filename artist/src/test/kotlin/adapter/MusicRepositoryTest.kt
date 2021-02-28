@@ -15,7 +15,10 @@ class MusicRepositoryTest : Spek({
             lateinit var music: Music
 
             Given("올바른 음악이 주어진 경우") {
-                music = Music("1")
+                val title = "Hurricane"
+                val description = "I spent a day recently driving around LA delivering my friends and collaborators flowers and cakes I made then turned it into this little lyric video."
+                val sourceLink = "https://www.youtube.com/watch?v=0XhbPmx4cnU"
+                music = Music("1", title, description, sourceLink)
             }
             When("음악을 저장할 때") {
                 repository.save(music)
@@ -32,7 +35,10 @@ class MusicRepositoryTest : Spek({
             lateinit var nextId: String
 
             Given("음악이 저장 되어있을 때") {
-                val music = Music(repository.nextId())
+                val title = "Hurricane"
+                val description = "I spent a day recently driving around LA delivering my friends and collaborators flowers and cakes I made then turned it into this little lyric video."
+                val sourceLink = "https://www.youtube.com/watch?v=0XhbPmx4cnU"
+                val music = Music(repository.nextId(), title, description, sourceLink)
                 repository.save(music)
             }
             When("다음 식별자를 얻는 경우") {
