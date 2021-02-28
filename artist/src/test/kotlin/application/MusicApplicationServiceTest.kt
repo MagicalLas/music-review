@@ -20,7 +20,7 @@ class MusicApplicationServiceTest: Spek({
             lateinit var releasedMusic: Music
 
             Given("아티스트가 이미 등록이 되어있으면") {
-                artist = Artist(artistRepository.nextId(), "Las", "Las is magical girl")
+                artist = Artist(artistRepository.nextId(), "Wafia", "Wafia is artist")
                 artistRepository.save(artist)
             }
             When("곡을 발표한다면") {
