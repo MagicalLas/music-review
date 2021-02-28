@@ -4,10 +4,10 @@ import domain.ArtistNotFoundError
 
 class ArtistApplicationService {
     fun  enrollArtist(name: String, description: String): Artist {
-        return Artist("")
+        return Artist("", name, description)
     }
 
     fun findSpecificArtist(id: String): Either<ArtistNotFoundError, Artist> {
-        return Either.right(Artist(""))
+        return Either.right(Artist("", "", ""))
     }
 }
