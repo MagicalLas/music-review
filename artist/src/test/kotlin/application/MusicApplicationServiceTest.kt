@@ -1,6 +1,7 @@
 package application
 
 import adapter.InMemoryArtistRepository
+import adapter.InMemoryMusicRepository
 import domain.Artist
 import domain.Music
 import org.spekframework.spek2.Spek
@@ -11,8 +12,10 @@ import strikt.assertions.isTrue
 class MusicApplicationServiceTest: Spek({
     Feature("Release New Music") {
         val artistRepository = InMemoryArtistRepository()
+        val musicRepository = InMemoryMusicRepository()
         val musicApplicationService = MusicApplicationService(
-            artistRepository
+            artistRepository,
+            musicRepository,
         )
 
         Scenario("한 아티스트가 자신이 만든 곡을 공개한다.") {
