@@ -1,6 +1,9 @@
 package adapter
 
+import arrow.core.Either
+import arrow.core.rightIfNotNull
 import domain.Artist
+import domain.ArtistNotFoundError
 
 class InMemoryArtistRepository {
     private val inMemoryCache: MutableMap<String, Artist> = mutableMapOf()
@@ -12,6 +15,10 @@ class InMemoryArtistRepository {
 
     fun findAllArtists(): List<Artist> {
         return inMemoryCache.values.toList()
+    }
+
+    fun findArtistById(id: String): Either<ArtistNotFoundError, Artist> {
+        return inMemoryCache[id].rightIfNotNull { ArtistNotFoundError(id) }
     }
 
     fun nextId(): String {
