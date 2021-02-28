@@ -28,12 +28,12 @@ class ArtistRepositoryTest: Spek({
     }
     Feature("다음 식별자 생성하기") {
         val repository = InMemoryArtistRepository()
-        lateinit var nextId: String
 
         Scenario("식별자 얻어오기") {
+            lateinit var nextId: String
 
             Given("아티스트가 저장이 되어있을 때"){
-                val artist = Artist("1", "Las", "Las is magical girl")
+                val artist = Artist(repository.nextId(), "Las", "Las is magical girl")
                 repository.save(artist)
             }
             When("다음 식별자를 얻는 경우"){
