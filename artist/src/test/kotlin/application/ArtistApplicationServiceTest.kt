@@ -1,6 +1,5 @@
 package application
 
-import ArtistApplicationService
 import adapter.InMemoryArtistRepository
 import domain.Artist
 import org.spekframework.spek2.Spek

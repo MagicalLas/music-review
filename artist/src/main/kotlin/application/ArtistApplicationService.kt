@@ -1,3 +1,5 @@
+package application
+
 import adapter.InMemoryArtistRepository
 import arrow.core.Either
 import arrow.core.firstOrNone
@@ -6,7 +8,7 @@ import domain.ArtistNotFoundError
 
 
 class ArtistApplicationService(
-    val artistRepository: InMemoryArtistRepository
+    private val artistRepository: InMemoryArtistRepository
 ) {
 
     fun enrollArtist(name: String, description: String): Artist {
