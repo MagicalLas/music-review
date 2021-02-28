@@ -12,7 +12,8 @@ class ArtistApplicationService(
 ) {
 
     fun enrollArtist(name: String, description: String): Artist {
-        val artist = Artist("", name, description)
+        val id = artistRepository.nextId()
+        val artist = Artist(id, name, description)
         artistRepository.save(artist)
         return artist
     }
