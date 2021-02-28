@@ -27,7 +27,7 @@ class MusicApplicationServiceTest: Spek({
                 val title = "Hurricane"
                 val description = "I spent a day recently driving around LA delivering my friends and collaborators flowers and cakes I made then turned it into this little lyric video."
                 val sourceLink = "https://www.youtube.com/watch?v=0XhbPmx4cnU"
-                var releasedMusic = musicApplicationService.releaseNewMusic(
+                releasedMusic = musicApplicationService.releaseNewMusic(
                     artist.id,
                     title,
                     description,
