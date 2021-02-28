@@ -1,5 +1,7 @@
 package application
 
+import ArtistApplicationService
+import domain.Artist
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import strikt.api.expectThat
