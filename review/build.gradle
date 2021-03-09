@@ -1,5 +1,9 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+
+    // Spring
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 }
 
 group 'dev.magical'
@@ -50,6 +54,9 @@ dependencies {
     implementation "io.arrow-kt:arrow-fx:$arrow_version"
     implementation "io.arrow-kt:arrow-optics:$arrow_version"
     implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+
+    // Spring-boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 // setup the test task
