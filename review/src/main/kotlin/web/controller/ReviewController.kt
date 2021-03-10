@@ -4,6 +4,7 @@ import application.ReviewApplicationService
 import domain.review.MusicId
 import domain.user.UserId
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,6 +16,7 @@ import web.dto.ReviewDTO
 
 @RestController
 @RequestMapping
+@CrossOrigin
 class ReviewController(
     @Autowired val reviewApplicationService: ReviewApplicationService,
 ) {
