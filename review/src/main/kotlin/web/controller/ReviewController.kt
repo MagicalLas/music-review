@@ -5,6 +5,7 @@ import domain.review.MusicId
 import domain.user.UserId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,18 +14,18 @@ import web.dto.CreateReviewRequestDTO
 import web.dto.ReviewDTO
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping
 class ReviewController(
     @Autowired val reviewApplicationService: ReviewApplicationService,
 ) {
-    @GetMapping
+    @GetMapping("/reviews")
     fun getAllReviewList(): List<ReviewDTO> {
         return reviewApplicationService
             .getAllReviewList()
             .map { ReviewDTO.fromModel(it) }
     }
 
-    @PostMapping
+    @PostMapping("/reviews")
     fun createReview(
         @RequestBody request: CreateReviewRequestDTO
     ): ReviewDTO {
@@ -34,5 +35,12 @@ class ReviewController(
             request.text
         )
         return ReviewDTO.fromModel(review)
+    }
+
+    @GetMapping("/users/{id}/reviews")
+    fun getUserReviewList(@PathVariable id: String): List<ReviewDTO> {
+        return reviewApplicationService
+            .getMyReviewList(UserId(id))
+            .map { ReviewDTO.fromModel(it) }
     }
 }
